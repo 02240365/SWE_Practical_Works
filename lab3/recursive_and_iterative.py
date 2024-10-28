@@ -139,7 +139,7 @@ print(f"{test_num} is a Fibonacci number: {is_fibonacci_number(test_num)}")
 
 
 
-# 4.Calculateing the ratio between consecutive Fibonacci numbers and observe how it approaches the golden ratio.
+# 4.Calculating the ratio between consecutive Fibonacci numbers and observe how it approaches the golden ratio.
 
 def fibonacci_ratios(limit):
     a, b = 0, 1
