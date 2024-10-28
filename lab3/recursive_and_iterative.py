@@ -86,77 +86,82 @@ print(f"Memoized: F({n}) = {memoized_result}, Time: {memoized_time:.6f} seconds"
 
 
 
+
+
+
 # Exercises
 
-# 1.Modify the iterative function to return a list of Fibonacci numbers up to n:
+# 1.Returning a list of Fibonacci numbers up to n, instead of just the nth number.
 
-def fibonacci_iterative_list(n):
-    fib_list = []
-    if n >= 0:
-        fib_list.append(0)
-    if n >= 1:
-        fib_list.append(1)
-    a, b = 0, 1
+def fibonacci_list(n):
+    if n <= 0:
+        return [0]
+    sequence = [0, 1]
     for _ in range(2, n + 1):
-        a, b = b, a + b
-        fib_list.append(b)
-    return fib_list
+        sequence.append(sequence[-1] + sequence[-2])
+    return sequence
 
-# Test the modified function
-print(fibonacci_iterative_list(10))
+# Test the function
+print(f"Fibonacci sequence up to F(20): {fibonacci_list(20)}")
 
 
-# 2.Implement a function that finds the index of the first Fibonacci number that exceeds a given value:
 
-def first_fib_exceeding(value):
+
+# 2.Finding the index of the first Fibonacci number that exceeds a given value.
+
+def find_fibonacci_exceeding(value):
     a, b = 0, 1
-    index = 0
-    while a <= value:
+    index = 1
+    while b <= value:
         a, b = b, a + b
         index += 1
     return index
 
 # Test the function
-print(first_fib_exceeding(21))  # Should return 8, since F(8) = 21 
+value = 67
+print(f"The first Fibonacci number greater than {value} is at index {find_fibonacci_exceeding(value)}")
 
 
 
 
-# 3.Create a function that determines if a given number is a Fibonacci number:
+# 3.Determining if a given number is a Fibonacci number.
 
-def is_fibonacci(num):
-    if num < 0:
-        return False
-    
-    # A number is Fibonacci if one of these expressions is a perfect square
-    def is_perfect_square(x):
-        s = int(x**0.5)
-        return s * s == x
-    
-    return is_perfect_square(5 * num * num + 4) or is_perfect_square(5 * num * num - 4)
-
-# Test the function
-print(is_fibonacci(21))  # True
-print(is_fibonacci(22))  # False
-
-
-
-# 4.Implement a function that calculates the ratio between consecutive Fibonacci numbers and observe how it approaches the golden ratio:
-
-def fibonacci_ratio(n):
+def is_fibonacci_number(num):
     a, b = 0, 1
-    for _ in range(n):
+    while b < num:
         a, b = b, a + b
-    return b / a
+    return b == num or num == 0
 
 # Test the function
-for i in range(10, 20):
-    print(f"Fibonacci ratio at {i}: {fibonacci_ratio(i)}")
+test_num = 19
+print(f"{test_num} is a Fibonacci number: {is_fibonacci_number(test_num)}")
+
+
+
+
+# 4.Calculateing the ratio between consecutive Fibonacci numbers and observe how it approaches the golden ratio.
+
+def fibonacci_ratios(limit):
+    a, b = 0, 1
+    ratios = []
+    for _ in range(2, limit + 1):
+        ratio = b / a if a != 0 else 0
+        ratios.append(ratio)
+        a, b = b, a + b
+    return ratios
+
+# Test the function
+limit = 10
+ratios = fibonacci_ratios(limit)
+print("Ratios between consecutive Fibonacci numbers:", ratios)
+
+
 
 
 
 
 # Discussion Questions
+
 
 """
 1.What are the advantages and disadvantages of the recursive approach compared to the iterative approach?

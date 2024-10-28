@@ -1,20 +1,3 @@
-# Define the content for the text file
-content = """
-Python is an interpreted, high-level, general-purpose programming language.
-It was created by Guido van Rossum and first released in 1991.
-Python's design philosophy emphasizes code readability with the use of significant indentation.
-Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.
-Python is dynamically typed and garbage-collected.
-It supports multiple programming paradigms, including structured (particularly, procedural), object-oriented, and functional programming.
-"""
-
-# Create and write to the text file
-with open('sample.txt', 'w') as file:
-    file.write(content)
-
-print("sample.txt has been created and written to successfully.")
-
-
 # Step 1: Open and Read a Text File
 
 def read_file(filename):
@@ -113,7 +96,9 @@ num_unique_words = count_unique_words(content)
 print(f"Number of unique words: {num_unique_words}")
 
 
+
 # 2.Find the longest word in the text.
+
 def longest_word(content):
     words = content.split()
     return max(words, key=len)
@@ -130,19 +115,28 @@ def count_specific_word(content, word):
     return words.count(word.lower())
 
 # Add to analyze_text
-specific_word = 'your_word_here'  # Replace with the word you want to search
+specific_word = 'Programming'  # Replace with the word you want to search
 specific_word_count = count_specific_word(content, specific_word)
 print(f"Occurrences of '{specific_word}': {specific_word_count}")
 
 
 # 4.Calculate the percentage of words that are longer than the average word length.
 
+def average_word_length(content):
+    words = content.split()
+    if len(words) == 0:  # Check to avoid division by zero
+        return 0
+    total_length = sum(len(word) for word in words)
+    return total_length / len(words)
+
 def percentage_longer_than_avg(content):
     words = content.split()
     avg_length = average_word_length(content)
+    if len(words) == 0:  # Check to avoid division by zero
+        return 0
     long_words = [word for word in words if len(word) > avg_length]
     return (len(long_words) / len(words)) * 100
 
 # Add to analyze_text
 percentage_long = percentage_longer_than_avg(content)
-print(f"Percentage of words longer than average:")
+print(f"Percentage of words longer than average: {percentage_long}%")
